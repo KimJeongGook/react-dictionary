@@ -447,93 +447,307 @@
 // export default App;
 
 
+// import './App.css';
+// import React, { Component } from "react";
+// import Dictionary from './Dictionary';
+
+// class App extends Component {
+//   constructor(props){
+//     console.log('constructor')
+//     super(props)
+//     this.state = {
+//       loading: true,
+//       words: []
+//     } 
+//   } 
+//   // //이벤트 핸들러 함수
+//   // changeName = () => {
+//   //   console.log(this)
+//   //   this.setState({name: 'name changed'})
+//   // }
+//   //컴포넌트가 생성되었을때 호출이 됨
+//   componentDidMount() {
+//     console.log('mount')
+//     const BASE_URL = 'https://dictionary-search-words.herokuapp.com/api/words'
+
+//     //서버에서 데이터 가져오기
+//     fetch(BASE_URL)
+//     .then( res => res.json())
+//     .then( result => {
+//       console.log(result)
+//       const {words}=result
+//       this.setState({loading: false, words})
+//     })
+//   }
+//   //컴포넌트가 업데이트 되었을때 호출이 됨
+//   componentDidUpdate() {
+//     console.log('update')
+//   }
+//   //컴포넌트가 제거되었을때 호출이 됨
+//   componentWillUnmount() {
+//     console.log('unmount')
+//   }
+
+//   render() {
+//     const {loading, words} = this.state
+
+//     const containerStyle = {
+//       width: '75%',
+//       columns: '1',
+//       margin: '30px auto',
+//       textAlign: 'center',
+//     }
+
+//     if(loading){
+//       return(
+//         <div>
+//           <h1>Loading ...</h1>
+//         </div>
+//       )
+//     }else{
+//       return(
+//         <div id="cntainero" style={containerStyle}>
+//             <h1>국어대사전</h1>
+//                 <input id="search" type="text" placeholder="단어를 검색하세요 ..."></input>
+//                 <input id="submit" type="submit" value="찾기"></input> 
+//                 <br></br><br></br>
+//                 <hr></hr>
+//                 <br></br>
+          
+//           {/* 오픈 API 데이터 순회 => 컴포넌트로 변환 */}
+//           {words.map(dictionary => {
+//             return(
+//               // r_word, r_link, r_seq, r_chi, r_pos, r_des
+
+//               <Dictionary 
+//                 key={dictionary._id}
+//                 r_word = {dictionary.r_word}
+//                 r_link={dictionary.r_link}
+//                 r_seq={dictionary.r_seq}
+//                 r_chi={dictionary.r_chi}
+//                 r_pos={dictionary.r_pos}
+//                 r_des={dictionary.r_des}
+//                 >
+//               </Dictionary>
+//             )
+//           })}
+//         </div>
+//       )
+//     }
+//   }
+// }
+
+// export default App;
+
+
+// import './App.css';
+// import React, { Component } from 'react';
+// import animals from './dummyData'
+
+// class App extends Component {
+//   state = {
+//     count: 0
+//   }
+//   increaseCount = () => {
+//     this.setState({count: this.state.count +1})
+//   }
+//   //초기에 웹 화면이 렌더링 되었을때 타이머를 설정함
+//   componentDidMount(){
+//     this.countID = setInterval(this.increaseCount, 1000)
+//   }
+//   //사용자가 웹 화면을 벗어나면 타이머를 해제함
+//   componentWillUnmount(){
+//     clearInterval(this.countID)
+//   }
+//   render(){
+//     const {count} = this.state
+//     console.log(animals)
+//     const animal = animals[count%animals.length]
+
+//     return(
+//       <div className="App">
+//         {/* <h1>increase count automatically</h1> */}
+//         {/* <h2>{count}</h2> */}
+//         <h1>Image Gallery !</h1>
+//         <img src={animal.src} alt={animal.title}></img>
+//       </div>
+//     );
+//   }
+// }
+
+// export default App;
+
+
+// import './App.css';
+// import React, { Component } from 'react';
+// import words from './dummyData'
+
+// class App extends Component {
+//   state = {
+//     count: 0,
+//     number: 0,
+//     numbers: '',
+//     index: 0,
+//   }
+//   increaseCount = () => {
+//     this.setState({count: this.state.count +1})
+//   }
+//   //초기에 웹 화면이 렌더링 되었을때 타이머를 설정함
+//   componentDidMount(){
+//     this.countID = setInterval(this.increaseCount, 1500)
+//     this.countID = setInterval(this.showRandomNumber, 1500)
+//     this.countID = setInterval(this.setNumber, 1500)
+//   }
+//   //사용자가 웹 화면을 벗어나면 타이머를 해제함
+//   componentWillUnmount(){
+//     clearInterval(this.countID)
+//   }
+
+//   setNumber = () => {
+//     this.setState({index: this.pickRandomNumber(0, words.length-1)})
+//   }
+
+//   // 로또 번호 생성 (교수님)
+//   pickRandomNumber = (min, max) => {
+//     return Math.floor(Math.random()*(max-min+1)) +min
+//   }
+//   //로또 중복 검사
+//   checkDuplication = (numbers, picked) => {
+//     return numbers.find(num => num === picked)
+//   }
+//   showRandomNumber = () => {
+//     const numbers = []
+//     let cnt = 0;
+//     while(numbers.length < 6){
+//       const picked = this.pickRandomNumber(1, 6)
+//       const isDuplicated = this.checkDuplication(numbers, picked)
+//       if(isDuplicated){
+//         console.log('duplicated...', isDuplicated)
+//         numbers.push(this.pickRandomNumber(1, 6))
+//       }else{
+//         numbers.push(picked)
+//       }
+//       cnt ++;
+//     }
+//     this.setState({number:this.pickRandomNumber(1,6), numbers:numbers.join(' ')})
+//   }
+
+//   render(){
+//     const {count} = this.state
+
+//     const word = words[count%words.length]
+//     console.log(words)
+
+//     const {index} = this.state
+//     const word_picked = words[index]
+//     console.log(words.length, index)
+
+//     //로또번호(교수님)
+//     const {number, numbers} = this.state
+
+//     //로또 번호
+//     const num1= this.pickRandomNumber(1,45)
+
+//     const num2 = []
+//     while(num2.length < 6){
+//       let ran = Math.floor(Math.random()*45) +1
+//       if (num2.indexOf(ran) === -1){
+//         num2.push(ran)
+//       }
+//     }
+//     console.log(num2)
+
+//     const cardStyle = {
+//       background:'tan',
+//       width: '40%',
+//       margin: '0 auto',
+//       textAlign: 'center',
+//       padding: '20px',
+//       color: 'white'
+//     }
+
+//     return(
+//       <div className="App">
+//         <h1>-increase count automatically-</h1>
+//         <h2>{count}</h2>
+        
+//         <h1>-Lotto Number-</h1>
+//         <h2>{num1}</h2>
+//         <h2>{num2}</h2>
+
+//         <div style={cardStyle}>
+//           <h1>-Lotto Numbers -</h1>
+//           <h2>{number}</h2>
+//           <h2>{numbers}</h2>
+//         </div>
+
+//         <h1 >-Words-</h1>
+//         <h2>{word.word}</h2>
+//         <h2>{word.meaning}</h2>
+
+//         <div style={cardStyle}>
+//           <h1 style={{borderBottom:'1px solid lightgray'}}>-Words-</h1>
+//           <h2>{word_picked.word}</h2>
+//           <h2>{word_picked.meaning}</h2>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
+
+// // export default App;
+
+
+// import './App.css';
+// import React, { Component } from 'react';
+// import Button from './Button';
+
+// class App extends Component {
+//   handleClick = () => alert('clicked button')
+//   render(){
+//     return( 
+//       <div className="App">
+//         <Button size="small" color="blue" width="fullWidth">Add Todo</Button>
+//         <Button size="medium" color="tomato">
+//           <img src="http://simpleicon.com/wp-content/uploads/rocket.png" 
+//             width="30px" height="30px"></img>Add Todo</Button>
+//         <Button size="large" color="grey" handleClick={this.handleClick}
+//           disabled={true}>Add Todo</Button>
+//       </div>
+//     )
+//   }
+// }
+
+// export default App;
+
+
 import './App.css';
-import React, { Component } from "react";
-import Dictionary from './Dictionary';
+import React, { Component } from 'react';
+import Nav from './Nav';
 
 class App extends Component {
-  constructor(props){
-    console.log('constructor')
-    super(props)
-    this.state = {
-      loading: true,
-      words: []
-    } 
-  } 
-  // //이벤트 핸들러 함수
-  // changeName = () => {
-  //   console.log(this)
-  //   this.setState({name: 'name changed'})
-  // }
-  //컴포넌트가 생성되었을때 호출이 됨
-  componentDidMount() {
-    console.log('mount')
-    const BASE_URL = 'https://dictionary-search-words.herokuapp.com/api/words'
-
-    //서버에서 데이터 가져오기
-    fetch(BASE_URL)
-    .then( res => res.json())
-    .then( result => {
-      console.log(result)
-      const {words}=result
-      this.setState({loading: false, words})
-    })
-  }
-  //컴포넌트가 업데이트 되었을때 호출이 됨
-  componentDidUpdate() {
-    console.log('update')
-  }
-  //컴포넌트가 제거되었을때 호출이 됨
-  componentWillUnmount() {
-    console.log('unmount')
-  }
-
-  render() {
-    const {loading, words} = this.state
-
-    const containerStyle = {
-      width: '75%',
-      columns: '1',
-      margin: '30px auto',
-      textAlign: 'center',
-    }
-
-    if(loading){
-      return(
-        <div>
-          <h1>Loading ...</h1>
-        </div>
-      )
-    }else{
-      return(
-        <div id="cntainero" style={containerStyle}>
-            <h1>국어대사전</h1>
-                <input id="search" type="text" placeholder="단어를 검색하세요 ..."></input>
-                <input id="submit" type="submit" value="찾기"></input> 
-                <br></br><br></br>
-                <hr></hr>
-                <br></br>
-          
-          {/* 오픈 API 데이터 순회 => 컴포넌트로 변환 */}
-          {words.map(dictionary => {
-            return(
-              // r_word, r_link, r_seq, r_chi, r_pos, r_des
-
-              <Dictionary 
-                key={dictionary._id}
-                r_word = {dictionary.r_word}
-                r_link={dictionary.r_link}
-                r_seq={dictionary.r_seq}
-                r_chi={dictionary.r_chi}
-                r_pos={dictionary.r_pos}
-                r_des={dictionary.r_des}
-                >
-              </Dictionary>
-            )
-          })}
-        </div>
-      )
-    }
+  state = { menus: [
+      { sitetitle: '구글',
+        siteUrl: 'https://google.com'
+      },
+      { sitetitle: '네이버',
+        siteUrl: 'https://naver.com'
+      },
+      { sitetitle: '사전 검색서비스',
+        siteUrl: 'https://KimJeongGook.github.io/dictionary-front'
+      },
+    ] }
+  render(){
+    const {menus} = this.state
+        
+    return( 
+      <div className="App">
+        <>
+        {/* <Nav></Nav> */}
+        <Nav menus={menus}></Nav>
+        </>
+      </div>
+    )
   }
 }
 
